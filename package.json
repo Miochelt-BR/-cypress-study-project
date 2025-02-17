@@ -1,0 +1,24 @@
+{
+  "name": "-cypress-study-project",
+  "version": "1.0.0",
+  "description": "Este repositório é dedicado ao estudo e prática com Cypress, uma ferramenta poderosa para testes end-to-end em aplicações web.",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/Miochelt-BR/-cypress-study-project.git"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "type": "commonjs",
+  "bugs": {
+    "url": "https://github.com/Miochelt-BR/-cypress-study-project/issues"
+  },
+  "homepage": "https://github.com/Miochelt-BR/-cypress-study-project#readme",
+  "devDependencies": {
+    "cypress": "^14.0.3"
+  }
+}
