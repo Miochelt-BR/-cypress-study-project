@@ -22,9 +22,18 @@ describe("login", () => {
 
   });
 
+  it("radio buttons e checkbox", () => {
+    cy.visit('/'); 
+    cy.get('.header-logo') 
+    cy.get('#footer_one')
+      .contains('Checkout View One')
+      .click()
+      cy.get('#materialUnchecked')
+        .check()
+     
 
 
-  
+  });
 
-  
+
 });
