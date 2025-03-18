@@ -17,7 +17,7 @@ O objetivo deste repositório é fornecer exemplos práticos, experimentos e tes
 Aqui está o vídeo demonstrativo do meu projeto:
 
 <video width="640" height="360" controls>
-  <source src="video/Teste web ‐ Feito com o Clipchamp.mp4" type="video/mp4">
+  <source src="/video/Teste web ‐ Feito com o Clipchamp.mp4" type="video/mp4">
   Seu navegador não suporta a tag de vídeo.
 </video>
 
