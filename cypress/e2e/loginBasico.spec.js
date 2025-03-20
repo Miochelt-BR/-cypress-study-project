@@ -1,13 +1,25 @@
 
-// Página de Login utilizando o padrão Page Object Model (POM) para melhor organização e reutilização de código nos testes.
 
 describe("Teste de Login", () => {
-  
-  it.only("Deve realizar um login válido", () => {
-    cy.acessarLogin();
-    cy.preencherEmail();
-    cy.preencherSenha();
-    cy.clicarBotaoLogin();
+  beforeEach(() => {
+    cy.visit('/login');
+  });
+
+  it("Deve realizar um login válido", () => {
+    const email = "thiago.arica@outlook.com";
+    const password = "123456";
+
+    cy.screenshot('01-acessando-pagina-login');
+
+    cy.get('#user').type(email);
+    cy.screenshot('02-preenchendo-email');
+
+    cy.get('#password').type(password);
+    cy.screenshot('03-preenchendo-senha');
+
+    cy.get('#btnLogin').click();
+    cy.screenshot('04-clicando-botao');
+
     cy.get('.swal2-container').should('be.visible');
     cy.get('.swal2-title').should('have.text', 'Login realizado');
 
@@ -15,7 +27,6 @@ describe("Teste de Login", () => {
   });
 
   it("Não deve permitir login sem e-mail", () => {
-    cy.acessarlogin();
     const password = "123456";
     cy.get('#password').type(password);
     cy.screenshot('02-preenchendo-senha');
@@ -27,7 +38,6 @@ describe("Teste de Login", () => {
   });
 
   it("Não deve permitir login sem senha", () => {
-    cy.acessarlogin();
     const email = "thiago.arica@outlook.com";
     
     cy.get('#user').type(email);
@@ -40,7 +50,6 @@ describe("Teste de Login", () => {
   });
 
   it("Não deve permitir login com credenciais inválidas", () => {
-    cy.acessarlogin();
     cy.get('#btnLogin').click();
     cy.screenshot('04-clicando-botao');
 
