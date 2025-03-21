@@ -1,3 +1,4 @@
+
 import { faker } from '@faker-js/faker';
 
 describe("Teste de Cadastro", () => {
@@ -10,19 +11,12 @@ describe("Teste de Cadastro", () => {
     const email = faker.internet.email();
     const password = faker.internet.password(8);
 
-    cy.screenshot('01-acessando-pagina');
+    cy.tirarPrint('01-acessando-pagina');
+    cy.preencherCadastro(name, email, password);
+    cy.tirarPrint('02-preenchendo-dados');
 
-    cy.get('#user').type(name);
-    cy.screenshot('02-preenchendo-user');
-
-    cy.get('#email').type(email);
-    cy.screenshot('03-preenchendo-email');
-
-    cy.get('#password').type(password);
-    cy.screenshot('04-preenchendo-senha');
-
-    cy.get('#btnRegister').click();
-    cy.screenshot('05-clicando-botao');
+    cy.submeterCadastro();
+    cy.tirarPrint('03-clicando-botao');
 
     cy.get('.swal2-container').should('be.visible');
     cy.get('.swal2-title').should('have.text', 'Cadastro realizado!');
@@ -35,48 +29,39 @@ describe("Teste de Cadastro", () => {
     const email = faker.internet.email();
     const password = faker.internet.password(8);
 
-    cy.get('#email').type(email);
-    cy.screenshot('02-preenchendo-email');
+    cy.preencherCadastro(null, email, password);
+    cy.tirarPrint('02-preenchendo-dados');
 
-    cy.get('#password').type(password);
-    cy.screenshot('03-preenchendo-senha');
+    cy.submeterCadastro();
+    cy.tirarPrint('03-clicando-botao');
 
-    cy.get('#btnRegister').click();
-    cy.screenshot('04-clicando-botao');
-
-    cy.get('#errorMessageFirstName').should('be.visible').and('contain', 'O campo nome deve ser prenchido');
+    cy.validarMensagem('#errorMessageFirstName', 'O campo nome deve ser prenchido');
   });
 
   it("Não deve permitir cadastro sem email", () => {
     const name = faker.person.fullName();
     const password = faker.internet.password(8);
 
-    cy.get('#user').type(name);
-    cy.screenshot('02-preenchendo-user');
+    cy.preencherCadastro(name, null, password);
+    cy.tirarPrint('02-preenchendo-dados');
 
-    cy.get('#password').type(password);
-    cy.screenshot('03-preenchendo-senha');
+    cy.submeterCadastro();
+    cy.tirarPrint('03-clicando-botao');
 
-    cy.get('#btnRegister').click();
-    cy.screenshot('04-clicando-botao');
-
-    cy.get('#errorMessageFirstName').should('be.visible').and('contain', 'O campo e-mail deve ser prenchido corretamente');
+    cy.validarMensagem('#errorMessageFirstName', 'O campo e-mail deve ser prenchido corretamente');
   });
 
   it("Não deve permitir cadastro sem senha", () => {
     const name = faker.person.fullName();
     const email = faker.internet.email();
 
-    cy.get('#user').type(name);
-    cy.screenshot('02-preenchendo-user');
+    cy.preencherCadastro(name, email, null);
+    cy.tirarPrint('02-preenchendo-dados');
 
-    cy.get('#email').type(email);
-    cy.screenshot('03-preenchendo-email');
+    cy.submeterCadastro();
+    cy.tirarPrint('03-clicando-botao');
 
-    cy.get('#btnRegister').click();
-    cy.screenshot('04-clicando-botao');
-
-    cy.get('#errorMessageFirstName').should('be.visible').and('contain', 'O campo senha deve ter pelo menos 6 dígitos');
+    cy.validarMensagem('#errorMessageFirstName', 'O campo senha deve ter pelo menos 6 dígitos');
   });
 });
 
